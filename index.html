@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Mi Gordita ❤️</title>
+
+<style>
+body{
+    margin:0;
+    background:#050505;
+    color:white;
+    font-family:sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+}
+
+button{
+    padding:15px 30px;
+    font-size:18px;
+    border:none;
+    border-radius:20px;
+    background:#ff6b81;
+    color:white;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div>
+    <h1>💖 Para Mi Gordita 💖</h1>
+    <p>Haz clic para empezar la magia ✨</p>
+    <button onclick="iniciar()">Entrar 💕</button>
+</div>
+
+<!-- AUDIO -->
+<audio id="musica" loop>
+    <source src="cancion.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function iniciar(){
+    const audio = document.getElementById("musica");
+    audio.play();
+
+    document.body.innerHTML = `
+        <h1>✨ Nuestra Galaxia ✨</h1>
+        <p>La música ya está sonando ❤️</p>
+    `;
+}
+</script>
+
+</body>
+</html>
