@@ -21,7 +21,7 @@ body{
     font-family:sans-serif;
 }
 
-/* GALAXIA */
+/* FONDO */
 #nebula{
     position:fixed;
     width:200%;
@@ -32,17 +32,15 @@ body{
 }
 
 @keyframes move{
-    from{transform:translate(0,0);}
     to{transform:translate(-25%,-25%);}
 }
 
 /* ESTRELLAS */
 .star{
     position:absolute;
-    width:2px;
-    height:2px;
+    width:2px;height:2px;
     background:white;
-    opacity:.6;
+    opacity:.7;
     animation:twinkle 3s infinite alternate;
 }
 
@@ -51,7 +49,18 @@ body{
     to{opacity:1;}
 }
 
-/* UI */
+/* DECORACIÓN */
+.float{
+    position:absolute;
+    animation:floatUp linear infinite;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    to{transform:translateY(-120vh);}
+}
+
+/* TITULO */
 #ui{
     position:absolute;
     top:5%;
@@ -60,13 +69,11 @@ body{
 }
 
 h1{
-    font-size:2.5rem;
     color:var(--gold);
-    animation:float 4s ease-in-out infinite;
+    animation:float 4s infinite;
 }
 
 @keyframes float{
-    0%,100%{transform:translateY(0);}
     50%{transform:translateY(-10px);}
 }
 
@@ -75,29 +82,21 @@ h1{
     position:absolute;
     font-size:3rem;
     cursor:pointer;
-    animation:floatObj 6s ease-in-out infinite;
-    transition:.3s;
-}
-
-.obj:hover{
-    transform:scale(1.3);
+    animation:floatObj 6s infinite;
 }
 
 @keyframes floatObj{
-    0%,100%{transform:translateY(0);}
     50%{transform:translateY(-20px);}
 }
 
 /* FRASES */
 .trail{
     position:absolute;
-    font-weight:bold;
-    animation:fade 3.5s forwards;
+    animation:fade 4s forwards;
     text-shadow:0 0 10px pink;
 }
 
 @keyframes fade{
-    0%{opacity:0;}
     20%{opacity:1;}
     100%{transform:translateY(-80px);opacity:0;}
 }
@@ -106,9 +105,8 @@ h1{
 .modal{
     display:none;
     position:fixed;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.85);
+    width:100%;height:100%;
+    background:rgba(0,0,0,.9);
     justify-content:center;
     align-items:center;
 }
@@ -120,55 +118,55 @@ h1{
     border-radius:20px;
     max-width:350px;
     max-height:80vh;
-    overflow-y:auto;
-    text-align:center;
-    animation:pop .4s ease;
+    overflow:auto;
 }
 
-@keyframes pop{
-    from{transform:scale(.5);opacity:0;}
+/* CHAT */
+.msg{
+    max-width:70%;
+    padding:8px;
+    margin:5px;
+    border-radius:10px;
+    animation:msgIn .3s ease;
+}
+
+@keyframes msgIn{
+    from{transform:scale(.8);opacity:0;}
     to{transform:scale(1);opacity:1;}
 }
 
-/* FOTO */
-.box img{
-    width:100%;
-    border-radius:15px;
-    box-shadow:0 0 20px pink;
+.yo{background:#dcf8c6;align-self:flex-end;}
+.ella{background:white;align-self:flex-start;}
+
+.typing{
+    font-size:12px;
+    opacity:.6;
+    margin:5px;
 }
 
-/* BOTONES */
+/* BOTON */
 button{
     margin-top:10px;
-    padding:10px 20px;
+    padding:10px;
     border:none;
     border-radius:20px;
     background:var(--pink);
     color:white;
-    cursor:pointer;
 }
 
-/* FINAL */
 #final{
     display:none;
     position:absolute;
-    top:50%;
-    left:50%;
+    top:50%;left:50%;
     transform:translate(-50%,-50%);
-    padding:20px 40px;
-    border:none;
-    border-radius:30px;
+    padding:20px;
     background:var(--gold);
-    font-size:1.5rem;
-    cursor:pointer;
     animation:pulse 2s infinite;
 }
 
 @keyframes pulse{
-    0%,100%{transform:translate(-50%,-50%) scale(1);}
     50%{transform:translate(-50%,-50%) scale(1.1);}
 }
-
 </style>
 </head>
 
@@ -177,171 +175,151 @@ button{
 <div id="nebula"></div>
 
 <div id="ui">
-    <h1>Nuestra Galaxia 💖</h1>
-    <p>Encuentra los recuerdos ✨</p>
+<h1>Nuestra Galaxia 💖</h1>
 </div>
 
-<!-- OBJETOS -->
-<div class="obj" style="top:30%;left:20%" onclick="clickObj(this,'Desde que llegaste a mi vida, todo tiene más sentido y más felicidad 💖')">💖</div>
-<div class="obj" style="top:60%;left:30%" onclick="clickObj(this,'No importa dónde esté, mientras sea contigo, siempre será mi lugar favorito ✨')">🌟</div>
-<div class="obj" style="top:40%;left:70%" onclick="clickObj(this,'Si tuviera que elegir mil veces, mil veces te elegiría a ti sin dudarlo 🎁')">🎁</div>
-<div class="obj" style="top:70%;left:75%" onclick="clickObj(this,'Cada recuerdo contigo es un tesoro que guardo en lo más profundo de mi corazón 📜')">📜</div>
-<div class="obj" style="top:15%;left:60%" onclick="clickObj(this,'Eres lo más valioso que tengo en mi vida y siempre voy a cuidarte 💎')">💎</div>
+<div class="obj" style="top:30%;left:20%" onclick="clickObj(this,'Te amo demasiado 💖')">💖</div>
+<div class="obj" style="top:60%;left:30%" onclick="clickObj(this,'Siempre contigo ✨')">🌟</div>
+<div class="obj" style="top:40%;left:70%" onclick="clickObj(this,'Te elegiría siempre 🎁')">🎁</div>
+<div class="obj" style="top:70%;left:75%" onclick="clickObj(this,'Nuestro recuerdo 📜')">📜</div>
+<div class="obj" style="top:15%;left:60%" onclick="clickObj(this,'Mi todo 💎')">💎</div>
 
-<button id="final" onclick="finalMsg()">💌 Mensaje final</button>
+<button id="final" onclick="finalMsg()">💌 Mensaje</button>
 
 <div class="modal" id="modal">
-    <div class="box" id="box"></div>
+<div class="box" id="box"></div>
 </div>
 
 <script>
 
 // estrellas
 for(let i=0;i<120;i++){
-    let s=document.createElement("div");
-    s.className="star";
-    s.style.top=Math.random()*100+"vh";
-    s.style.left=Math.random()*100+"vw";
-    document.body.appendChild(s);
+ let s=document.createElement("div");
+ s.className="star";
+ s.style.top=Math.random()*100+"vh";
+ s.style.left=Math.random()*100+"vw";
+ document.body.appendChild(s);
 }
 
-// FRASES
-const frases=[
-"mi amor ❤️",
-"mi gordita 💖",
-"mi caprichosita 🎀",
-"mi tiquitita ✨",
-"mi mujer 💍"
-];
+// decoracion flotante
+setInterval(()=>{
+ let e=document.createElement("div");
+ e.className="float";
+ e.innerText=["❤️","✨","💖","🌸"][Math.random()*4|0];
+ e.style.left=Math.random()*100+"vw";
+ e.style.fontSize="20px";
+ e.style.animationDuration=(Math.random()*5+5)+"s";
+ document.body.appendChild(e);
+ setTimeout(()=>e.remove(),8000);
+},300);
+
+// frases
+const frases=["mi amor ❤️","mi gordita 💖","mi caprichosita 🎀","mi tiquitita ✨"];
 
 function trail(e){
-    if(Math.random()>0.04)return;
-    let t=document.createElement("div");
-    t.className="trail";
-    t.innerText=frases[Math.floor(Math.random()*frases.length)];
-    t.style.left=e.pageX+"px";
-    t.style.top=e.pageY+"px";
-    document.body.appendChild(t);
-    setTimeout(()=>t.remove(),3500);
+ if(Math.random()>0.05)return;
+ let t=document.createElement("div");
+ t.className="trail";
+ t.innerText=frases[Math.random()*frases.length|0];
+ t.style.left=e.pageX+"px";
+ t.style.top=e.pageY+"px";
+ document.body.appendChild(t);
+ setTimeout(()=>t.remove(),4000);
 }
 
-// JUEGO
+// juego
 let count=0;
-
 function clickObj(el,text){
-    if(el.style.opacity=="0.3")return;
-    el.style.opacity="0.3";
-    count++;
-    showModal(`<p>${text}</p>`);
-
-    if(count===5){
-        document.getElementById("final").style.display="block";
-    }
+ if(el.style.opacity=="0.3")return;
+ el.style.opacity="0.3";
+ count++;
+ showModal(text);
+ if(count===5) final.style.display="block";
 }
 
 function showModal(content){
-    document.getElementById("box").innerHTML = content + `<br><button onclick="closeModal()">Cerrar</button>`;
-    document.getElementById("modal").style.display="flex";
+ box.innerHTML=content+'<br><button onclick="closeModal()">Cerrar</button>';
+ modal.style.display="flex";
 }
 
-// CHAT + MENSAJE
+// CHAT REAL
 function mensajeSecreto(){
-    document.getElementById("box").innerHTML = `
-        <h2>💬 Nuestro chat</h2>
-        <div id="chat" style="background:#e5ddd5;padding:10px;border-radius:10px;height:300px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;"></div>
-        <br>
-        <button id="continuarBtn" style="display:none;" onclick="mostrarCarta()">Continuar 💖</button>
-    `;
-    document.getElementById("modal").style.display="flex";
+ box.innerHTML=`<h3>💬 Chat</h3><div id="chat" style="display:flex;flex-direction:column;height:300px;overflow:auto;background:#e5ddd5;padding:10px;border-radius:10px;"></div>`;
+ modal.style.display="flex";
 
-    const mensajes=[
-        {text:"Hola mi amor ❤️",tipo:"yo"},
-        {text:"Hola mi vida 😘",tipo:"ella"},
-        {text:"Te amo mucho",tipo:"yo"},
-        {text:"Yo más 💖",tipo:"ella"},
-        {text:"Eres mi todo",tipo:"yo"},
-        {text:"Y tú el mío 🥺",tipo:"ella"}
-    ];
+ const mensajes=[
+  ["Hola mi amor ❤️","yo"],
+  ["Hola mi vida 😘","ella"],
+  ["Te amo demasiado","yo"],
+  ["Yo mucho más 💖","ella"],
+  ["Eres todo para mí","yo"],
+  ["Y tú mi mundo 🥺","ella"]
+ ];
 
-    let i=0;
-    const chat=document.getElementById("chat");
+ let i=0;
+ const chat=document.getElementById("chat");
 
-    function agregar(){
-        if(i>=mensajes.length){
-            document.getElementById("continuarBtn").style.display="block";
-            return;
-        }
+ function escribir(){
+  if(i>=mensajes.length){
+    setTimeout(()=>mostrarCarta(),1000);
+    return;
+  }
 
-        let m=document.createElement("div");
-        m.innerText=mensajes[i].text;
-        m.style.maxWidth="70%";
-        m.style.margin="5px";
-        m.style.padding="8px";
-        m.style.borderRadius="10px";
+  let typing=document.createElement("div");
+  typing.className="typing";
+  typing.innerText="Natasha está escribiendo...";
+  chat.appendChild(typing);
 
-        if(mensajes[i].tipo=="yo"){
-            m.style.alignSelf="flex-end";
-            m.style.background="#dcf8c6";
-        }else{
-            m.style.alignSelf="flex-start";
-            m.style.background="white";
-        }
+  setTimeout(()=>{
+    typing.remove();
 
-        chat.appendChild(m);
-        chat.scrollTop=chat.scrollHeight;
+    let m=document.createElement("div");
+    m.className="msg "+mensajes[i][1];
+    m.innerText=mensajes[i][0];
+    chat.appendChild(m);
+    chat.scrollTop=chat.scrollHeight;
 
-        i++;
-        setTimeout(agregar,1200);
-    }
+    i++;
+    escribir();
+  },1000);
+ }
 
-    agregar();
+ escribir();
 }
 
-// CARTA
+// carta
 function mostrarCarta(){
-    showModal(`
-        <h2>Para ti mi amor 💖</h2>
-        <p style="text-align:left;">
-        Mi gordita hermosa<br><br>
-
-        Ya cinco meses que cumplimos desde ese 30 de octubre donde yo me tome de valor y te propuse ser mi novia, al escucharte decir que NO estaba apunto de derrumbarse mi mundo, pero al escucharte decir que SI mis ojos brillaron me puse muy feliz porque sabía que a la persona que le dijera eso sería la persona correcta, desde ese entonces ya no solo pensaba en mi si no en los dos y quiero decirte gracias por estar siempre conmigo dentro de estos 5 meses Te Amo Mucho Natasha.<br><br>
-
-        Mi mundo entero es usted.
-        </p>
-    `);
+ showModal(`<h3>💖</h3><p style="text-align:left;">
+ Mi gordita hermosa<br><br>
+ Ya cinco meses que cumplimos desde ese 30 de octubre donde yo me tome de valor y te propuse ser mi novia, al escucharte decir que NO estaba apunto de derrumbarse mi mundo, pero al escucharte decir que SI mis ojos brillaron me puse muy feliz porque sabía que a la persona que le dijera eso sería la persona correcta, desde ese entonces ya no solo pensaba en mi si no en los dos y quiero decirte gracias por estar siempre conmigo dentro de estos 5 meses Te Amo Mucho Natasha.<br><br>
+ Mi mundo entero es usted.
+ </p>`);
 }
 
-// FINAL
+// final
 function finalMsg(){
-    showModal(`
-        <h2>Mi amor 💖</h2>
-        <img src="foto.jpg">
-        <p>Te amo infinitamente ❤️</p>
-        <button onclick="mensajeSecreto()">💌 Ver chat</button>
-    `);
+ showModal(`<p>💖 Te amo 💖</p><button onclick="mensajeSecreto()">Ver chat</button>`);
 }
 
-// EFECTO SORPRESA
+// cierre con sorpresa
 function closeModal(){
-    document.getElementById("modal").style.display="none";
+ modal.style.display="none";
 
-    for(let i=0;i<30;i++){
-        let e=document.createElement("div");
-        e.innerText="💖";
-        e.style.position="absolute";
-        e.style.left="50%";
-        e.style.top="50%";
-        e.style.transition="all 1s ease-out";
-        document.body.appendChild(e);
+ for(let i=0;i<40;i++){
+  let e=document.createElement("div");
+  e.innerText="💖";
+  e.style.position="absolute";
+  e.style.left="50%";
+  e.style.top="50%";
+  document.body.appendChild(e);
 
-        setTimeout(()=>{
-            e.style.left=Math.random()*100+"vw";
-            e.style.top=Math.random()*100+"vh";
-            e.style.opacity=0;
-        },10);
+  setTimeout(()=>{
+    e.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
+    e.style.opacity=0;
+  },10);
 
-        setTimeout(()=>e.remove(),1000);
-    }
+  setTimeout(()=>e.remove(),1000);
+ }
 }
 
 </script>
