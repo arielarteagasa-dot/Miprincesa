@@ -92,12 +92,14 @@ h1{
 .trail{
     position:absolute;
     font-weight:bold;
-    animation:fade 2s forwards;
+    animation:fade 3.5s forwards; /* MÁS LENTO */
     text-shadow:0 0 10px pink;
 }
 
 @keyframes fade{
-    to{transform:translateY(-60px);opacity:0;}
+    0%{opacity:0; transform:translateY(0);}
+    20%{opacity:1;}
+    100%{transform:translateY(-80px);opacity:0;}
 }
 
 /* MODAL */
@@ -116,7 +118,9 @@ h1{
     color:black;
     padding:20px;
     border-radius:20px;
-    max-width:340px;
+    max-width:350px;
+    max-height:80vh; /* 🔥 IMPORTANTE */
+    overflow-y:auto; /* 🔥 SCROLL */
     text-align:center;
     animation:pop .4s ease;
 }
@@ -131,12 +135,6 @@ h1{
     width:100%;
     border-radius:15px;
     box-shadow:0 0 20px pink;
-    animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-    from{box-shadow:0 0 10px pink;}
-    to{box-shadow:0 0 25px gold;}
 }
 
 /* BOTONES */
@@ -211,25 +209,24 @@ for(let i=0;i<120;i++){
     document.body.appendChild(s);
 }
 
-// FRASES LARGAS
+// FRASES (CORTAS COMO PEDISTE)
 const frases=[
-"Te amo más de lo que las palabras pueden explicar ❤️",
-"Eres lo mejor que me ha pasado en la vida 💖",
-"Mi lugar favorito siempre será a tu lado ✨",
-"Contigo todo es más bonito, mi amor ☁️",
-"Eres mi paz, mi alegría y mi todo 💕",
-"Cada momento contigo es un recuerdo que guardo en mi corazón 💫"
+"mi amor ❤️",
+"mi gordita 💖",
+"mi caprichosita 🎀",
+"mi tiquitita ✨",
+"mi mujer 💍"
 ];
 
 function trail(e){
-    if(Math.random()>0.08)return;
+    if(Math.random()>0.04)return; // MÁS DESPACIO
     let t=document.createElement("div");
     t.className="trail";
     t.innerText=frases[Math.floor(Math.random()*frases.length)];
     t.style.left=e.pageX+"px";
     t.style.top=e.pageY+"px";
     document.body.appendChild(t);
-    setTimeout(()=>t.remove(),2000);
+    setTimeout(()=>t.remove(),3500); // MÁS TIEMPO
 }
 
 // JUEGO
@@ -255,7 +252,7 @@ function closeModal(){
     document.getElementById("modal").style.display="none";
 }
 
-// FINAL + MENSAJE SECRETO
+// FINAL
 function finalMsg(){
     showModal(`
         <h2>Mi amor 💖</h2>
@@ -271,7 +268,7 @@ function finalMsg(){
     lluvia();
 }
 
-// MENSAJE SECRETO (TU TEXTO)
+// MENSAJE SECRETO (TU TEXTO EXACTO)
 function mensajeSecreto(){
     showModal(`
         <h2>Para ti mi amor 💖</h2>
@@ -280,7 +277,7 @@ function mensajeSecreto(){
 
         Ya cinco meses que cumplimos desde ese 30 de octubre donde yo me tome de valor y te propuse ser mi novia, al escucharte decir que NO estaba apunto de derrumbarse mi mundo, pero al escucharte decir que SI mis ojos brillaron me puse muy feliz porque sabía que a la persona que le dijera eso sería la persona correcta, desde ese entonces ya no solo pensaba en mi si no en los dos y quiero decirte gracias por estar siempre conmigo dentro de estos 5 meses Te Amo Mucho Natasha.<br><br>
 
-        Mi mundo entero es usted. ❤️
+        Mi mundo entero es usted.
         </p>
     `);
 }
