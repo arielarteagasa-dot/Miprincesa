@@ -92,12 +92,12 @@ h1{
 .trail{
     position:absolute;
     font-weight:bold;
-    animation:fade 3.5s forwards; /* MÁS LENTO */
+    animation:fade 3.5s forwards;
     text-shadow:0 0 10px pink;
 }
 
 @keyframes fade{
-    0%{opacity:0; transform:translateY(0);}
+    0%{opacity:0;}
     20%{opacity:1;}
     100%{transform:translateY(-80px);opacity:0;}
 }
@@ -119,8 +119,8 @@ h1{
     padding:20px;
     border-radius:20px;
     max-width:350px;
-    max-height:80vh; /* 🔥 IMPORTANTE */
-    overflow-y:auto; /* 🔥 SCROLL */
+    max-height:80vh;
+    overflow-y:auto;
     text-align:center;
     animation:pop .4s ease;
 }
@@ -183,13 +183,9 @@ button{
 
 <!-- OBJETOS -->
 <div class="obj" style="top:30%;left:20%" onclick="clickObj(this,'Desde que llegaste a mi vida, todo tiene más sentido y más felicidad 💖')">💖</div>
-
 <div class="obj" style="top:60%;left:30%" onclick="clickObj(this,'No importa dónde esté, mientras sea contigo, siempre será mi lugar favorito ✨')">🌟</div>
-
 <div class="obj" style="top:40%;left:70%" onclick="clickObj(this,'Si tuviera que elegir mil veces, mil veces te elegiría a ti sin dudarlo 🎁')">🎁</div>
-
 <div class="obj" style="top:70%;left:75%" onclick="clickObj(this,'Cada recuerdo contigo es un tesoro que guardo en lo más profundo de mi corazón 📜')">📜</div>
-
 <div class="obj" style="top:15%;left:60%" onclick="clickObj(this,'Eres lo más valioso que tengo en mi vida y siempre voy a cuidarte 💎')">💎</div>
 
 <button id="final" onclick="finalMsg()">💌 Mensaje final</button>
@@ -209,7 +205,7 @@ for(let i=0;i<120;i++){
     document.body.appendChild(s);
 }
 
-// FRASES (CORTAS COMO PEDISTE)
+// FRASES
 const frases=[
 "mi amor ❤️",
 "mi gordita 💖",
@@ -219,14 +215,14 @@ const frases=[
 ];
 
 function trail(e){
-    if(Math.random()>0.04)return; // MÁS DESPACIO
+    if(Math.random()>0.04)return;
     let t=document.createElement("div");
     t.className="trail";
     t.innerText=frases[Math.floor(Math.random()*frases.length)];
     t.style.left=e.pageX+"px";
     t.style.top=e.pageY+"px";
     document.body.appendChild(t);
-    setTimeout(()=>t.remove(),3500); // MÁS TIEMPO
+    setTimeout(()=>t.remove(),3500);
 }
 
 // JUEGO
@@ -248,28 +244,61 @@ function showModal(content){
     document.getElementById("modal").style.display="flex";
 }
 
-function closeModal(){
-    document.getElementById("modal").style.display="none";
-}
-
-// FINAL
-function finalMsg(){
-    showModal(`
-        <h2>Mi amor 💖</h2>
-        <img src="foto.jpg">
-        <p>
-        Gracias por cada momento contigo.<br><br>
-        Eres mi felicidad, mi paz y mi todo.<br><br>
-        Te amo infinitamente ❤️
-        </p>
-        <button onclick="mensajeSecreto()">💌 Mensaje secreto</button>
-    `);
-
-    lluvia();
-}
-
-// MENSAJE SECRETO (TU TEXTO EXACTO)
+// CHAT + MENSAJE
 function mensajeSecreto(){
+    document.getElementById("box").innerHTML = `
+        <h2>💬 Nuestro chat</h2>
+        <div id="chat" style="background:#e5ddd5;padding:10px;border-radius:10px;height:300px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;"></div>
+        <br>
+        <button id="continuarBtn" style="display:none;" onclick="mostrarCarta()">Continuar 💖</button>
+    `;
+    document.getElementById("modal").style.display="flex";
+
+    const mensajes=[
+        {text:"Hola mi amor ❤️",tipo:"yo"},
+        {text:"Hola mi vida 😘",tipo:"ella"},
+        {text:"Te amo mucho",tipo:"yo"},
+        {text:"Yo más 💖",tipo:"ella"},
+        {text:"Eres mi todo",tipo:"yo"},
+        {text:"Y tú el mío 🥺",tipo:"ella"}
+    ];
+
+    let i=0;
+    const chat=document.getElementById("chat");
+
+    function agregar(){
+        if(i>=mensajes.length){
+            document.getElementById("continuarBtn").style.display="block";
+            return;
+        }
+
+        let m=document.createElement("div");
+        m.innerText=mensajes[i].text;
+        m.style.maxWidth="70%";
+        m.style.margin="5px";
+        m.style.padding="8px";
+        m.style.borderRadius="10px";
+
+        if(mensajes[i].tipo=="yo"){
+            m.style.alignSelf="flex-end";
+            m.style.background="#dcf8c6";
+        }else{
+            m.style.alignSelf="flex-start";
+            m.style.background="white";
+        }
+
+        chat.appendChild(m);
+        chat.scrollTop=chat.scrollHeight;
+
+        i++;
+        setTimeout(agregar,1200);
+    }
+
+    agregar();
+}
+
+// CARTA
+function mostrarCarta(){
     showModal(`
         <h2>Para ti mi amor 💖</h2>
         <p style="text-align:left;">
@@ -282,20 +311,37 @@ function mensajeSecreto(){
     `);
 }
 
-// LLUVIA
-function lluvia(){
-    setInterval(()=>{
+// FINAL
+function finalMsg(){
+    showModal(`
+        <h2>Mi amor 💖</h2>
+        <img src="foto.jpg">
+        <p>Te amo infinitamente ❤️</p>
+        <button onclick="mensajeSecreto()">💌 Ver chat</button>
+    `);
+}
+
+// EFECTO SORPRESA
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+
+    for(let i=0;i<30;i++){
         let e=document.createElement("div");
-        e.innerText=["❤️","✨","💖","🌸"][Math.floor(Math.random()*4)];
+        e.innerText="💖";
         e.style.position="absolute";
-        e.style.left=Math.random()*100+"vw";
-        e.style.top="-20px";
-        e.style.fontSize="20px";
+        e.style.left="50%";
+        e.style.top="50%";
+        e.style.transition="all 1s ease-out";
         document.body.appendChild(e);
 
-        setTimeout(()=>{e.style.transform="translateY(110vh)";},10);
-        setTimeout(()=>e.remove(),5000);
-    },300);
+        setTimeout(()=>{
+            e.style.left=Math.random()*100+"vw";
+            e.style.top=Math.random()*100+"vh";
+            e.style.opacity=0;
+        },10);
+
+        setTimeout(()=>e.remove(),1000);
+    }
 }
 
 </script>
