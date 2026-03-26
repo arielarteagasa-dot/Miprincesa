@@ -9,46 +9,32 @@
 :root{
     --pink:#ff99cc;
     --gold:#ffd700;
-    --bg1:#0a0f1f;
-    --bg2:#05070d;
 }
 
 body{
     margin:0;
     overflow:hidden;
-    background: radial-gradient(circle at center,var(--bg1),var(--bg2));
+    background: radial-gradient(circle,#0a0f1f,#05070d);
     color:white;
     font-family:sans-serif;
 }
 
 /* FONDO */
-#nebula{
-    position:fixed;
-    width:200%;
-    height:200%;
-    background: radial-gradient(circle,#1b2735,#090a0f);
-    animation:move 40s linear infinite;
-    z-index:-3;
-}
-@keyframes move{to{transform:translate(-25%,-25%);}}
-
-/* ESTRELLAS */
 .star{
     position:absolute;
     width:2px;height:2px;
     background:white;
     opacity:.7;
-    animation:twinkle 3s infinite alternate;
 }
-@keyframes twinkle{from{opacity:.2;}to{opacity:1;}}
 
-/* DECORACIÓN */
+/* DECORACION */
 .float{
     position:absolute;
     animation:floatUp linear infinite;
-    pointer-events:none;
 }
-@keyframes floatUp{to{transform:translateY(-120vh);}}
+@keyframes floatUp{
+    to{transform:translateY(-120vh);}
+}
 
 /* TITULO */
 #ui{
@@ -57,11 +43,6 @@ body{
     width:100%;
     text-align:center;
 }
-h1{
-    color:var(--gold);
-    animation:float 4s infinite;
-}
-@keyframes float{50%{transform:translateY(-10px);}}
 
 /* OBJETOS */
 .obj{
@@ -70,19 +51,17 @@ h1{
     cursor:pointer;
     animation:floatObj 6s infinite;
 }
-@keyframes floatObj{50%{transform:translateY(-20px);}}
+@keyframes floatObj{
+    50%{transform:translateY(-20px);}
+}
 
-/* FRASES CURSOR */
+/* FRASES */
 .trail{
     position:absolute;
-    font-size:1.2rem;
     font-weight:bold;
-    animation:fade 4.5s forwards;
-    text-shadow:0 0 10px pink;
+    animation:fade 5s forwards;
 }
 @keyframes fade{
-    0%{opacity:0;}
-    20%{opacity:1;}
     100%{transform:translateY(-80px);opacity:0;}
 }
 
@@ -103,6 +82,12 @@ h1{
     max-width:360px;
     max-height:80vh;
     overflow:auto;
+    text-align:center;
+}
+.box img{
+    width:100%;
+    border-radius:15px;
+    box-shadow:0 0 20px pink;
 }
 
 /* CHAT */
@@ -111,20 +96,11 @@ h1{
     padding:10px;
     margin:5px;
     border-radius:12px;
-    animation:msgIn .3s ease;
 }
-@keyframes msgIn{from{transform:scale(.8);opacity:0;}to{transform:scale(1);opacity:1;}}
-
 .yo{background:#dcf8c6;align-self:flex-end;}
 .ella{background:white;align-self:flex-start;}
 
-.typing{
-    font-size:12px;
-    opacity:.6;
-    margin:5px;
-}
-
-/* BOTONES */
+/* BOTON */
 button{
     margin-top:10px;
     padding:10px;
@@ -134,36 +110,40 @@ button{
     color:white;
 }
 
-/* FINAL */
-#final{
-    display:none;
+/* CORAZON FINAL */
+.big-heart{
     position:absolute;
+    font-size:100px;
     top:50%;left:50%;
     transform:translate(-50%,-50%);
-    padding:20px;
-    background:var(--gold);
-    animation:pulse 2s infinite;
+    animation:boom 1s ease;
 }
-@keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.1);}}
+@keyframes boom{
+    from{transform:translate(-50%,-50%) scale(0);}
+    to{transform:translate(-50%,-50%) scale(1);}
+}
 </style>
 </head>
 
 <body onmousemove="trail(event)">
 
-<div id="nebula"></div>
-
 <div id="ui">
 <h1>Nuestra Galaxia 💖</h1>
+<p>Encuentra todos los mensajes secretos ✨</p>
 </div>
 
-<!-- OBJETOS -->
-<div class="obj" style="top:30%;left:20%" onclick="clickObj(this,'Desde que llegaste a mi vida, todo tiene más sentido y más felicidad 💖')">💖</div>
-<div class="obj" style="top:60%;left:30%" onclick="clickObj(this,'No importa dónde esté, mientras sea contigo, siempre será mi lugar favorito ✨')">🌟</div>
-<div class="obj" style="top:40%;left:70%" onclick="clickObj(this,'Siempre te elegiría a ti sin pensarlo 🎁')">🎁</div>
-<div class="obj" style="top:70%;left:75%" onclick="clickObj(this,'Cada recuerdo contigo vive en mi corazón 📜')">📜</div>
-<div class="obj" style="top:15%;left:60%" onclick="clickObj(this,'Eres lo más valioso que tengo 💎')">💎</div>
+<!-- OBJETOS MÁS BONITOS -->
+<div class="obj" style="top:30%;left:20%" onclick="clickObj(this,'Desde que llegaste a mi vida, todo cambió completamente, porque contigo encontré la felicidad que siempre soñé 💖')">💖</div>
 
-<button id="final" onclick="finalMsg()">💌 Mensaje</button>
+<div class="obj" style="top:60%;left:30%" onclick="clickObj(this,'No importa dónde esté, mientras sea contigo, siempre será el lugar más bonito del mundo ✨')">🌟</div>
+
+<div class="obj" style="top:40%;left:70%" onclick="clickObj(this,'Si pudiera elegir mil veces, mil veces te elegiría a ti porque eres el amor de mi vida 🎁')">🎁</div>
+
+<div class="obj" style="top:70%;left:75%" onclick="clickObj(this,'Cada momento contigo es un recuerdo que guardo en lo más profundo de mi corazón 📜')">📜</div>
+
+<div class="obj" style="top:15%;left:60%" onclick="clickObj(this,'Eres mi mayor tesoro, lo más valioso que tengo y lo que siempre voy a cuidar 💎')">💎</div>
+
+<button id="final" onclick="finalMsg()" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">💌 Mensaje</button>
 
 <div class="modal" id="modal">
 <div class="box" id="box"></div>
@@ -172,7 +152,7 @@ button{
 <script>
 
 // estrellas
-for(let i=0;i<120;i++){
+for(let i=0;i<100;i++){
  let s=document.createElement("div");
  s.className="star";
  s.style.top=Math.random()*100+"vh";
@@ -186,19 +166,19 @@ setInterval(()=>{
  e.className="float";
  e.innerText=["❤️","✨","💖","🌸"][Math.random()*4|0];
  e.style.left=Math.random()*100+"vw";
- e.style.fontSize="20px";
  e.style.animationDuration=(Math.random()*5+5)+"s";
  document.body.appendChild(e);
  setTimeout(()=>e.remove(),8000);
 },400);
 
-// FRASES CORTAS LENTAS
+// FRASES CURSOR
 const frases=[
 "mi gordita 💖",
 "mi caprichosita 🎀",
 "mi tiquitita ✨",
 "mi amor ❤️",
-"mi mujer 💍"
+"mi vida 💕",
+"mi todo 💫"
 ];
 
 function trail(e){
@@ -209,7 +189,7 @@ function trail(e){
  t.style.left=e.pageX+"px";
  t.style.top=e.pageY+"px";
  document.body.appendChild(t);
- setTimeout(()=>t.remove(),4500);
+ setTimeout(()=>t.remove(),5000);
 }
 
 // juego
@@ -239,10 +219,10 @@ function mensajeSecreto(){
  const mensajes=[
   ["Hola mi amor ❤️","yo"],
   ["Hola mi vida 😘","ella"],
-  ["Solo quería recordarte lo mucho que te amo","yo"],
-  ["Yo también te amo demasiado 💖","ella"],
-  ["Eres lo mejor que me ha pasado","yo"],
-  ["Y tú eres mi todo 🥺","ella"]
+  ["Solo quería decirte que eres lo mejor que me ha pasado","yo"],
+  ["Tú eres todo para mí 💖","ella"],
+  ["Quiero estar contigo siempre","yo"],
+  ["Siempre juntos mi amor ❤️","ella"]
  ];
 
  let i=0;
@@ -250,39 +230,32 @@ function mensajeSecreto(){
 
  function escribir(){
   if(i>=mensajes.length){
-    document.getElementById("nextBtn").style.display="block";
+    nextBtn.style.display="block";
     return;
   }
 
-  let typing=document.createElement("div");
-  typing.className="typing";
-  typing.innerText="Natasha está escribiendo...";
-  chat.appendChild(typing);
+  let m=document.createElement("div");
+  m.className="msg "+mensajes[i][1];
+  m.innerText=mensajes[i][0];
+  chat.appendChild(m);
+  chat.scrollTop=chat.scrollHeight;
 
-  setTimeout(()=>{
-    typing.remove();
-
-    let m=document.createElement("div");
-    m.className="msg "+mensajes[i][1];
-    m.innerText=mensajes[i][0];
-    chat.appendChild(m);
-    chat.scrollTop=chat.scrollHeight;
-
-    i++;
-    escribir();
-  },1200);
+  i++;
+  setTimeout(escribir,1200);
  }
 
  escribir();
 }
 
-// CARTA
+// CARTA CON FOTO
 function mostrarCarta(){
- showModal(`<p style="text-align:left;">
+ showModal(`
+ <img src="foto.jpg">
+ <p style="text-align:left;">
  Mi gordita hermosa<br><br>
- Ya cinco meses que cumplimos desde ese 30 de octubre donde yo me tome de valor y te propuse ser mi novia, al escucharte decir que NO estaba apunto de derrumbarse mi mundo, pero al escucharte decir que SI mis ojos brillaron me puse muy feliz porque sabía que a la persona que le dijera eso sería la persona correcta, desde ese entonces ya no solo pensaba en mi si no en los dos y quiero decirte gracias por estar siempre conmigo dentro de estos 5 meses Te Amo Mucho Natasha.<br><br>
- Mi mundo entero es usted.
- </p>`);
+ Ya cinco meses... (tu texto completo)
+ </p>
+ `);
 }
 
 // FINAL
@@ -290,9 +263,31 @@ function finalMsg(){
  showModal(`<p>Te amo infinitamente ❤️</p><button onclick="mensajeSecreto()">Ver chat</button>`);
 }
 
-// CERRAR
+// CIERRE CON EFECTO BONITO
 function closeModal(){
  modal.style.display="none";
+
+ let heart=document.createElement("div");
+ heart.className="big-heart";
+ heart.innerText="💖";
+ document.body.appendChild(heart);
+
+ setTimeout(()=>heart.remove(),1000);
+
+ for(let i=0;i<30;i++){
+  let e=document.createElement("div");
+  e.innerText="✨";
+  e.style.position="absolute";
+  e.style.left=Math.random()*100+"vw";
+  e.style.top="50%";
+  document.body.appendChild(e);
+
+  setTimeout(()=>{
+    e.style.transform="translateY(100vh)";
+  },10);
+
+  setTimeout(()=>e.remove(),2000);
+ }
 }
 
 </script>
